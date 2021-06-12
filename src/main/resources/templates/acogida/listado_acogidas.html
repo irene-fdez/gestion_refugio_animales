@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Listado de acogida</title>
+</head>
+
+<body>
+	<h1 class="center-text">Listado de acogida</h1>
+
+	<form th:action="@{/acogidas}" method="post" class="form-horizontal" id="buscar-form">
+		<div class="row mb-5">
+			<div class="col-10 form-group">
+				<div class="control-group" id="tipoEntrada">
+					<label class="col-2 control-label">Tipo de entrada</label>
+					<input class="col-10 form-control" th:name="tipoEntrada" size="30" maxlength="80" placeholder="Tipo entrada..."/>
+				</div>
+			</div>
+
+			<div class="col-2 form-group ">
+				<button type="submit" class="btn btn-sm btn-block btn-dark">Buscar</button>
+				<button type="submit" class="btn btn-sm btn-block btn-dark">Buscar todos</button>
+			</div>
+		</div>
+	</form>
+
+
+	<table id="dataTable" name="acogidas" class="table table-striped text-center">
+		<thead>
+			<tr>
+				<th>Animal</th>
+				<th>Centro</th>
+				<th>Fecha de entrada</th>
+				<th>Tipo de entrada</th>
+				<th width="20%"/>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="acogida : ${acogidas}">
+				<td><a th:href="@{/acogidas/__${acogida.id}__/detalle}" th:text="${acogida.animal.nombre}+' ('+${acogida.animal.tipo.nombre}+' - '+${acogida.animal.tipo.raza}+ ')'"></a></td>
+				<td th:text="${acogida.centro.nombre}+' ('+${acogida.centro.ciudad.nombre+')'}" />
+				<td th:text="${acogida.fechaEntrada}" />
+				<td th:text="${acogida.tipoEntrada}" />
+				<td>
+					<a class="btn btn-sm btn-outline-info" th:href="@{/acogidas/__${acogida.id}__}">Editar</a> 
+					<a class="btn btn-sm btn-outline-danger" th:href="@{/acogidas/__${acogida.id}__/eliminar}">Borrar</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<br />
+
+	<a class="col-2 btn btn-block btn-primary" th:href="@{/acogidas/nuevo}">Nueva acogida</a>
+</body>
+</html>

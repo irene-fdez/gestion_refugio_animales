@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Listado de tipos de animales</title>
+</head>
+
+<body>
+	<h1 class="center-text">Listado de tipos de animales</h1>
+
+	<form th:action="@{/tipos}" method="post" class="form-horizontal" id="buscar-form">
+		<div class="row mb-5">
+			<div class="col-10 form-group">
+				<div class="control-group" id="nombre">
+					<label class="col-2 control-label">Nombre</label>
+					<input class="col-10 form-control" th:name="nombre" size="30" maxlength="80" placeholder="Nombre..."/>
+				</div>
+				<div class="control-group mt-3" id="raza">
+					<label class="col-2 control-label">Raza</label>
+					<input class="col-10 form-control" th:name="raza" size="30" maxlength="80" placeholder="Raza..."/>
+				</div>
+ 				<div class="control-group mt-3" id="especie"> 
+					<label class="col-2 control-label">Especie</label>
+					<select class="col-10 form-control" th:name="especie">
+						<option th:value=null>Selecciona especie...</option>
+		                <option th:each="especieAnimal : ${T(es.uvigo.esei.mei.refugio.entidades.EspeciesAnimales).values()}"
+                                th:value="${especieAnimal}"
+                                th:text="${especieAnimal}" 
+                                th:selected>
+                        </option>         
+		            </select>
+				</div>
+			</div>
+
+
+			<div class="col-2 form-group">
+				<button type="submit" class="btn btn-sm btn-block btn-dark">Buscar</button>
+				<button type="submit" class="btn btn-sm btn-block btn-dark">Buscar todos</button>
+			</div>
+		</div>
+	</form>
+
+
+	<table id="dataTable" name="tipos" class="table table-striped text-center">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Raza</th>
+				<th>Especie</th>
+				<th width="20%"/>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="tipo : ${tipos}">
+				<td><a th:href="@{/tipos/__${tipo.id}__/detalle}" th:text="${tipo.nombre}"></a></td>
+				<td th:text="${tipo.raza}" />
+				<td th:text="${tipo.especie}" />
+				<td>
+					<a class="btn btn-sm btn-outline-info" th:href="@{/tipos/__${tipo.id}__}">Editar</a> 
+					<a class="btn btn-sm btn-outline-danger" th:href="@{/tipos/__${tipo.id}__/eliminar}" >Borrar</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<br />
+
+	<a class="col-2 btn btn-block btn-primary" th:href="@{/tipos/nuevo}">Nuevo tipo</a>
+</body>
+</html>

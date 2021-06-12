@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Usuario</title>
+</head>
+
+<body>
+	<h1 class="center-text" th:text="Usuario"></h1>
+
+	<form th:object="${persona}" class="form-horizontal" id="persona-form" method="post">
+		<div class="form-group has-feedback">
+
+			<div class="form-group">
+				<label class="col-2 control-label">DNI</label>
+				<input class="col-10 form-control" th:field="*{DNI}" readonly="readonly" />
+				<label class="col-2 control-label mt-3">Nombre</label>
+				<input class="col-10 form-control" th:field="*{nombre}" readonly="readonly" />
+				<label type="date" class="col-2 control-label mt-3">Fecha nacimiento</label>
+				<input class="col-10 form-control" th:field="*{fechaNacimiento}" readonly="readonly" />
+				<label class="col-2 control-label mt-3">Especialidad</label>
+				<input class="col-10 form-control" th:field="*{especialidad}" readonly="readonly" />
+				<label class="col-2 control-label mt-3">Centro</label>
+				<input class="col-10 form-control" th:field="*{centroTrabajo.nombre}" readonly="readonly" />
+			</div>
+			<div class="form-group">
+				<a class="btn btn-lg btn-block btn-secondary col-2" th:href="@{/personas/}">Cancelar</a>
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>

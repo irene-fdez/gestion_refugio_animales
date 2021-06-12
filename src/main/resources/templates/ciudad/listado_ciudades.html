@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Listado de ciudades</title>
+</head>
+
+<body>
+	<h1 class="center-text">Listado de Ciudades</h1>
+
+	<form th:action="@{/ciudades}" method="post" class="form-horizontal" id="buscar-form">
+		<div class="row mb-5">
+			<div class="col-10 form-group">
+				<div class="control-group" id="nombre">
+					<label class="col-2 control-label">Nombre</label>
+					<input class="col-10 form-control" th:name="nombre" size="30" maxlength="80" placeholder="Nombre..."/>
+				</div>
+			</div>
+
+
+			<div class="col-2 form-group">
+				<button type="submit" class="btn btn-sm btn-block btn-dark">Buscar</button>
+				<button type="submit" class="btn btn-sm btn-block btn-dark">Buscar todos</button>
+			</div>
+		</div>
+	</form>
+
+
+	<table id="dataTable" name="ciudades" class="table table-striped text-center">
+		<thead>
+			<tr>
+				<th >Nombre</th>
+				<th width="30%"/>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="ciudad : ${ciudades}">
+				<td><a th:href="@{/ciudades/__${ciudad.id}__/detalle}" th:text="${ciudad.nombre}"></a></td>
+				<td>
+					<a class="btn btn-sm btn-outline-info" th:href="@{/ciudades/__${ciudad.id}__}">Editar</a> 
+					<a class="btn btn-sm btn-outline-danger" th:href="@{/ciudades/__${ciudad.id}__/eliminar}" >Borrar</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<br />
+
+	<a class="col-2 btn btn-block btn-primary" th:href="@{/ciudades/nuevo}">Nueva ciudad</a>
+</body>
+</html>

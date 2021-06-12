@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Editar/crear tipo de animal</title>
+</head>
+
+<body>
+	<h1 class="center-text" th:text="${esNuevo} ? 'Crear tipo de animal' : 'Editar tipo de animal'"></h1>
+
+	<form th:object="${tipo}" class="form-horizontal" id="tipo-form" method="post">
+		<div class="form-group has-feedback">
+
+			<div class="form-group">
+				<label class="col-2 control-label">Nombre</label>
+				<input class="col-10 form-control" th:field="*{nombre}" size="30" maxlength="100" placeholder="Nombre..." required/>
+				
+				<label class="col-2 control-label mt-3">Raza</label>
+				<input class="col-10 form-control" th:field="*{raza}" size="30" maxlength="100" placeholder="Raza..." required/>
+				
+				<label class="col-2 control-label mt-3">Especie</label>
+				<select class="col-10 form-control" th:field="*{especie}" required>
+					<option th:value="null"> Selecciona especie...</option>	
+	                <option th:each="especieAnimal : ${T(es.uvigo.esei.mei.refugio.entidades.EspeciesAnimales).values()}"
+	                        th:value="${especieAnimal}"
+	                        th:text="${especieAnimal}"
+	                        th:selected="${especie == especieAnimal}" >
+	                </option>                    
+                </select>
+			</div>
+			<div class="form-group">
+				<a class="btn btn-inline btn-dark col-2" th:href="@{/tipos/}">Cancelar</a>
+				
+				<button class="btn btn-inline btn-primary col-2" th:text="${esNuevo} ? 'Crear' : 'Guardar'" type="submit">
+					Guardar</button>
+			</div>
+		</div>
+	</form>
+
+
+
+</body>
+</html>

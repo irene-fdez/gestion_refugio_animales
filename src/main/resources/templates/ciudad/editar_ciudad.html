@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Editar/crear ciudad</title>
+</head>
+
+<body>
+	<h1 class="center-text" th:text="${esNuevo} ? 'Crear ciudad' : 'Editar ciudad'"></h1>
+
+	<form th:object="${ciudad}" class="form-horizontal" id="ciudad-form" method="post">
+		<div class="form-group has-feedback">
+
+			<div class="form-group">
+				<label class="col-2 control-label">Nombre</label>
+				<input class="col-10 form-control" th:field="*{nombre}" size="30" maxlength="100" placeholder="Nombre..." required/>
+			</div>
+			<div class="form-group">
+				<a class="btn btn-inline btn-dark col-2" th:href="@{/ciudades/}">Cancelar</a>
+				
+				<button class="btn btn-inline btn-primary col-2" th:text="${esNuevo} ? 'Crear' : 'Guardar'" type="submit">
+					Guardar</button>
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>

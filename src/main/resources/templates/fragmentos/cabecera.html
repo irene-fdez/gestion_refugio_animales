@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+	<th:block th:fragment="cabecera">
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+			<a class="navbar-brand" th:href="@{/}">Refugio de Animales</a>
+			<div class="collapse navbar-collapse" id="navbars">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item"><a class="nav-link" th:href="@{/centros}">Centros</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/ciudades}">Ciudades</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/personas}">Usuarios</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    	Animales
+					    </a>
+					    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					        <a class="dropdown-item" th:href="@{/animales}">Animales</a>
+					        <div class="dropdown-divider"></div>
+					        <a class="dropdown-item" th:href="@{/tipos}">Tipos animal</a>
+					        <a class="dropdown-item" th:href="@{/acogidas}">Acogidas</a>
+					        <a class="dropdown-item" th:href="@{/vacunas}">Vacunas</a>
+				        </div>
+				     </li>
+				</ul>
+			</div>
+		</nav>
+	</th:block>
+</body>
+
+</html>

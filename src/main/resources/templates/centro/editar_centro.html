@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Editar/crear centro</title>
+</head>
+
+<body>
+	<h1 class="center-text" th:text="${esNuevo} ? 'Crear centro' : 'Editar centro'"></h1>
+
+	<form th:object="${centro}" class="form-horizontal" id="centro-form" method="post">
+		<div class="form-group has-feedback">
+
+			<div class="form-group">
+				<label class="col-2 control-label">Nombre</label>
+				<input class="col-10 form-control" th:field="*{nombre}" size="30" maxlength="100" placeholder="Nombre..." required="required"/>
+				
+				<label class="col-2 control-label mt-3">Direcci&oacuten</label>
+				<input class="col-10 form-control" th:field="*{direccion}" size="30" maxlength="100" placeholder="Direccion..." required="required"/>
+				
+				<label class="col-2 control-label mt-3">Ciudad</label>
+				<select class="col-10 form-control" th:field="*{ciudad}" required="required">
+					<option th:value="null">Selecciona ciudad... </option>
+	                <option th:each="c : ${ciudades}" th:value="${c.id}" th:text="${c.nombre}" 
+	                        selected="${!esNuevo && c.id == ciudad.id} ? 'selected' : 'none'">
+	                </option>      
+	            </select>
+			</div>
+			<div class="form-group">
+				<a class="btn btn-lg btn-inline btn-secondary col-2" th:href="@{/centros/}">Cancelar</a>
+
+				<button class="btn btn-lg btn-inline btn-primary col-2" th:text="${esNuevo} ? 'Crear' : 'Guardar'" type="submit">
+					Guardar</button>
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>

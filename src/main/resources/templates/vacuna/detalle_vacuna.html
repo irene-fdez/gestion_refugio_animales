@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Vacuna</title>
+</head>
+
+<body>
+	<h1 class="center-text" th:text="Vacuna"></h1>
+
+	<form th:object="${vacuna}" class="form-horizontal" id="vacuna-form" method="post">
+		<div class="form-group has-feedback">
+
+			<div class="form-group">
+				<label class="col-2 control-label">Tipo vacuna</label>
+				<input class="col-10 form-control" th:field="*{tipo}" size="30" maxlength="100" readonly="readonly"/>
+				
+				<label class="col-2 control-label mt-3">Fecha vacunaci&oacuten</label>
+				<input type="date" class="col-10 form-control" th:field="*{fechaVacunacion}" size="30" maxlength="100" readonly="readonly"/>
+				
+				<label class="col-2 control-label mt-3">Animal</label>
+				<input class="col-10 form-control" th:field="*{animal.nombre}" readonly="readonly" />
+				
+				<label class="col-2 control-label mt-3">Fecha nacimiento</label>
+				<input class="col-10 form-control" th:field="*{animal.fechaNacimiento}" readonly="readonly" />
+				
+				<label class="col-2 control-label mt-3">Tipo animal</label>
+				<input class="col-10 form-control" th:field="*{animal.tipo.nombre}" readonly="readonly" />
+				
+				<label class="col-2 control-label mt-3">Raza</label>
+				<input class="col-10 form-control" th:field="*{animal.tipo.raza}" readonly="readonly" />
+				
+				<label class="col-2 control-label mt-3">Especie</label>
+				<input class="col-10 form-control" th:field="*{animal.tipo.especie}" readonly="readonly" />
+
+
+			</div>
+			<div class="form-group">
+				<a class="btn  btn-block btn-dark col-2" th:href="@{/vacunas/}">Cancelar</a>
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>

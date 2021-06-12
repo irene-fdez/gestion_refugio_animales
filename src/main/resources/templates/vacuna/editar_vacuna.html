@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Editar/crear vacuna de animal</title>
+</head>
+
+<body>
+	<h1 class="center-text" th:text="${esNuevo} ? 'Crear vacuna para un animal' : 'Editar vacuna de un animal'"></h1>
+
+	<form th:object="${vacuna}" class="form-horizontal" id="vacuna-form" method="post">
+		<div class="form-group has-feedback">
+
+			<div class="form-group">
+				<label class="col-2 control-label">Animal</label>
+				<select class="col-10 form-control" th:field="*{animal}" >
+					<option th:value="null">Selecciona animal...</option>
+	                <option th:each="a : ${animales}" th:value="${a.id}" th:text="${a.nombre}+' - '+ ${a.tipo.raza}" 
+	                        selected="${!esNuevo && a.id == animal.id} ? 'selected' : 'none'">
+	                </option>      
+	            </select>
+	            
+				<label class="col-2 control-label mt-3">Tipo vacuna</label>
+				<input class="col-10 form-control" th:field="*{tipo}" size="30" maxlength="100" placeholder="Tipo..." required="required"/>
+				
+				<label class="col-2 control-label mt-3">Fecha vacunaci&oacuten</label>
+				<input type="date" class="col-10 form-control" th:field="*{fechaVacunacion}" required="required" />
+
+			</div>
+			<div class="form-group">
+				<a class="btn btn-inline btn-dark col-2" th:href="@{/vacunas/}">Cancelar</a>
+				
+				<button class="btn btn-inline btn-primary col-2" th:text="${esNuevo} ? 'Crear' : 'Guardar'" type="submit">
+					Guardar</button>
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>

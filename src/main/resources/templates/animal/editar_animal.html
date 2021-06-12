@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Editar/crear animal</title>
+</head>
+
+<body>
+	<h1 class="center-text" th:text="${esNuevo} ? 'Crear animal' : 'Editar animal'"></h1>
+
+	<form th:object="${animal}" class="form-horizontal" id="animal-form" method="post">
+		<div class="form-group has-feedback">
+
+			<div class="form-group">
+				
+				<label class="col-2 control-label">Nombre</label>
+				<input class="col-10 form-control" th:field="*{nombre}" size="30" maxlength="100" placeholder="Nombre..." required="required"/>
+				
+				<label class="col-2 control-label mt-3">Fecha de nacimiento</label>
+				<input type="date" class="col-10 form-control" th:field="*{fechaNacimiento}" required="required" />
+				
+				<label class="col-2 control-label mt-3">Color</label>
+				<input class="col-10 form-control" th:field="*{color}" size="30" maxlength="100" placeholder="Color..." required="required"/>
+				
+				<label class="col-2 control-label mt-3">Tipo animal</label>
+				<select class="col-10 form-control" th:field="*{tipo}">
+					<option th:value="null"> Selecciona tipo... </option>
+	                <option th:each="t : ${tipos}" th:value="${t.id}" th:text="${t.nombre}+' - '+ ${t.raza}+' - '+ ${t.especie}" 
+	                        selected="${!esNuevo && t.id == tipo.id} ? 'selected' : 'none'">
+	                </option>
+	            </select>
+	            
+	            <div th:if="${!esNuevo}" >
+		            <label class="col-2 control-label mt-3">Adoptante</label>
+					<select class="col-10 form-control" th:field="*{adoptante}" >
+						<option th:value="null">Selecciona adoptante... </option>
+		                <option th:each="p : ${personas}" th:value="${p.DNI}" th:text="${p.nombre}+' - '+${p.DNI}" 
+		                        selected="${!esNuevo && p.DNI == adoptante.DNI} ? 'selected' : 'none'">
+		                </option>      
+		            </select>
+	            </div>
+			</div>
+			<div class="form-group">
+				<a class="btn  btn-inline btn-dark col-2" th:href="@{/animales/}">Cancelar</a>
+				
+				<button class="btn btn-inline btn-primary col-2" th:text="${esNuevo} ? 'Crear' : 'Guardar'" type="submit">
+					Guardar</button>
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Editar/crear usuario</title>
+</head>
+
+<body>
+	<h1 class="center-text" th:text="${esNuevo} ? 'Crear usuario' : 'Editar usuario'"></h1>
+
+	<form th:object="${persona}" class="form-horizontal" id="persona-form" method="post">
+		<div class="form-group has-feedback">
+
+			<div class="form-group">
+				<label class="col-2 control-label">DNI</label>
+				<input class="col-10 form-control" th:field="*{DNI}" size="9" maxlength="9" required="required" placeholder="DNI..."/>
+				<label class="col-2 control-label mt-3">Nombre</label>
+				<input class="col-10 form-control" th:field="*{nombre}" size="30" maxlength="100" required="required" placeholder="Nombre..."/>
+				<label class="col-2 control-label mt-3">Fecha nacimiento</label>
+				<input type="date" class="col-10 form-control" th:field="*{fechaNacimiento}"  required="required"/>
+				<label class="col-2 control-label mt-3">Especialidad</label>
+				<input class="col-10 form-control" th:field="*{especialidad}" size="30" maxlength="100" placeholder="Especialidad..."/>
+				<label class="col-2 control-label mt-3">Centro de trabajo</label>
+				<select class="col-10 form-control" th:field="*{centroTrabajo}">
+					<option th:value="null">Selecciona centro... </option>
+	                <option th:each="c : ${centros}" th:value="${c.id}"th:text="${c.nombre}" 
+	                        selected="${!esNuevo && c.id == centroTrabajo.id} ? 'selected' : 'none'">
+	                </option>      
+	            </select>
+			</div>
+			<div class="form-group">
+				<a class="btn btn-inline btn-dark col-2" th:href="@{/personas/}">Cancelar</a>
+				
+				<button class="btn btn-inline btn-primary col-2" th:text="${esNuevo} ? 'Crear' : 'Guardar'" type="submit">
+					Guardar</button>
+			</div>
+		</div>
+	</form>
+
+
+
+</body>
+</html>

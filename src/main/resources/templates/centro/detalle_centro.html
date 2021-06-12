@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Centro</title>
+</head>
+
+<body>
+	<h1 class="center-text" th:text="Centro"></h1>
+
+	<form th:object="${centro}" class="form-horizontal" id="centro-form" method="post">
+		<div class="form-group has-feedback">
+
+			<div class="form-group">
+				<label class="col-2 control-label">Nombre</label>
+				<input class="col-10 form-control" th:field="*{nombre}" readonly="readonly" />
+				<label class="col-2 control-label mt-3">Direcci&oacuten</label>
+				<input class="col-10 form-control" th:field="*{direccion}" readonly="readonly" />
+				<label class="col-2 control-label mt-3">Ciudad</label>
+				<input class="col-10 form-control" th:field="*{ciudad.nombre}" readonly="readonly" />
+			</div>
+			<div class="form-group">
+				<a class="btn btn-block btn-dark col-2" th:href="@{/centros/}">Cancelar</a>
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>

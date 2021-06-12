@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Animal</title>
+</head>
+
+<body>
+	<h1 class="center-text" th:text="Animal"></h1>
+
+	<form th:object="${animal}" class="form-horizontal" id="animal-form" method="post">
+		<div class="form-group has-feedback">
+
+			<div class="form-group">
+				<label class="col-2 control-label">Nombre</label>
+				<input class="col-10 form-control" th:field="*{nombre}" readonly="readonly" />
+				
+				<label class="col-2 control-label mt-3">Fecha nacimiento</label>
+				<input class="col-10 form-control" th:field="*{fechaNacimiento}" readonly="readonly" />
+				
+				<label class="col-2 control-label mt-3">Color</label>
+				<input class="col-10 form-control" th:field="*{color}" readonly="readonly" />
+				
+				<label class="col-2 control-label mt-3">Tipo</label>
+				<input class="col-10 form-control" th:field="*{tipo.nombre}" readonly="readonly" />
+				
+				<label class="col-2 control-label mt-3">Raza</label>
+				<input class="col-10 form-control" th:field="*{tipo.raza}" readonly="readonly" />
+				
+				<label class="col-2 control-label mt-3">Especie</label>
+				<input class="col-10 form-control" th:field="*{tipo.especie}" readonly="readonly" />
+				
+				<label class="col-2 control-label mt-3">Adoptante</label>
+				<label class="col-10 form-control" th:text="${animal.adoptante} == null ? '-' : ${animal.adoptante.nombre}+' - '+${animal.adoptante.DNI}" readonly="readonly" />
+			</div>
+			<div class="form-group">
+				<a class="btn btn-block btn-dark col-2" th:href="@{/animales/}">Cancelar</a>
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Listado de vacunas de animales</title>
+</head>
+
+<body>
+	<h1 class="center-text">Listado de vacunas de animales</h1>
+
+	<form th:action="@{/vacunas}" method="post" class="form-horizontal" id="buscar-form">
+		<div class="row mb-5">
+			<div class="col-10 form-group">
+				<div class="control-group" id="tipo">
+					<label class="col-2 control-label">Tipo de vacuna</label>
+					<input class="col-10 form-control" th:name="tipo" size="30" maxlength="80" placeholder="Tipo..."/>
+				</div>
+			</div>
+
+
+			<div class="col-2 form-group">
+				<button type="submit" class="btn btn-sm btn-block btn-dark">Buscar</button>
+				<button type="submit" class="btn btn-sm btn-block btn-dark">Buscar todos</button>
+			</div>
+		</div>
+	</form>
+
+
+	<table id="dataTable" name="vacunas" class="table table-striped text-center">
+		<thead>
+			<tr>
+				<th>Animal</th>
+				<th>Tipo vacuna</th>
+				<th>Fecha vacunaci&oacuten</th>
+				<th width="20%" />
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="vacuna : ${vacunas}">
+				<td><a th:href="@{/vacunas/__${vacuna.id}__/detalle}" th:text="${vacuna.animal.nombre}+' ('+${vacuna.animal.tipo.nombre}+' - '+${vacuna.animal.tipo.raza}+ ')'"></a></td>
+				<td th:text="${vacuna.tipo}" />
+				<td th:text="${vacuna.fechaVacunacion}" />
+				<td>
+					<a class="btn btn-sm btn-outline-info" th:href="@{/vacunas/__${vacuna.id}__}">Editar</a> 
+					<a class="btn btn-sm btn-outline-danger" th:href="@{/vacunas/__${vacuna.id}__/eliminar}" >Borrar</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<br />
+
+	<a class="col-2 btn btn-block btn-primary" th:href="@{/vacunas/nuevo}">Nueva vacuna</a>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Listado de animales</title>
+</head>
+
+<body>
+	<h1 class="center-text">Listado de animales</h1>
+
+	<form th:action="@{/animales}" method="post" class="form-horizontal" id="buscar-form">
+		<div class="row mb-5">
+			<div class="col-10 form-group">
+				<div class="control-group" id="nombre">
+					<label class="col-2 control-label">Nombre</label>
+					<input class="col-10 form-control" th:name="nombre" size="30" maxlength="80" placeholder="Nombre..." />
+				</div>
+				<div class="control-group mt-3" id="color">
+					<label class="col-2 control-label">Color</label>
+					<input class="col-10 form-control" th:name="color" size="30" maxlength="80" placeholder="Color..."/>
+				</div>
+			</div>
+
+
+			<div class="col-2 form-group ">
+				<button type="submit" class="btn btn-lg btn-sm btn-block btn-dark">Buscar</button>
+				<button type="submit" class="btn btn-sm btn-block btn-dark">Buscar todos</button>
+			</div>
+		</div>
+	</form>
+
+
+	<table id="dataTable" name="animales" class="table table-striped text-center">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Fecha nacimiento</th>
+				<th>Color</th>
+				<th>Tipo</th>
+				<th>Raza</th>
+				<th>Especie</th>
+				<th>Adoptado</th>
+				<th width="20%"/>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="animal : ${animales}">
+				<td><a th:href="@{/animales/__${animal.id}__/detalle}" th:text="${animal.nombre}"></a></td>
+				<td th:text="${animal.fechaNacimiento}" />
+				<td th:text="${animal.color}" />
+				<td th:text="${animal.tipo.nombre}" />
+				<td th:text="${animal.tipo.raza}" />
+				<td th:text="${animal.tipo.especie}" />
+				<td th:text="${animal.adoptante == null ? 'No' : 'Si'}" />
+				<td>
+					<a class="btn btn-sm btn-outline-info" th:href="@{/animales/__${animal.id}__}">Editar</a> 
+					<a class="btn btn-sm btn-outline-danger" th:href="@{/animales/__${animal.id}__/eliminar}">Borrar</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<br />
+
+	<a class="col-2 btn btn-block btn-primary" th:href="@{/animales/nuevo}">Nuevo animal</a>
+</body>
+</html>

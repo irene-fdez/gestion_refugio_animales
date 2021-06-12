@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Listado de centros</title>
+</head>
+
+<body>
+	<h1 class="center-text">Listado de centros</h1>
+
+	<form th:action="@{/centros}" method="post" class="form-horizontal" id="buscar-form">
+		<div class="row mb-5">
+			<div class="col-10 form-group">
+				<div class="control-group" id="nombre">
+					<label class="col-2 control-label">Nombre</label>
+					<input class="col-10 form-control" th:name="nombre" size="30" maxlength="80" placeholder="Nombre..."/>
+				</div>
+				<div class="control-group mt-3" id="ciudad">
+					<label class="col-2 control-label">Ciudad</label>
+					<input class="col-10 form-control" th:name="ciudad" size="30" maxlength="80" placeholder="Ciudad..."/>
+				</div>
+			</div>
+
+			<div class="col-2 form-group">
+				<button type="submit" class="btn btn-block btn-dark">Buscar</button>
+				<button type="submit" class="btn btn-block btn-dark">Buscar todos</button>
+			</div>
+		</div>
+	</form>
+
+	<table id="dataTable" name="centros" class="table table-striped text-center">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Direcci&oacuten</th>
+				<th>Ciudad</th>
+				<th width="20%"/>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="centro : ${centros}">
+				<td><a th:href="@{/centros/__${centro.id}__/detalle}" th:text="${centro.nombre}"></a></td>
+				<td th:text="${centro.direccion}" />
+				<td th:text="${centro.ciudad.nombre}" />
+				<td>
+					<a class="btn btn-sm btn-outline-info" th:href="@{/centros/__${centro.id}__}">Editar</a> 
+					<a class="btn btn-sm btn-outline-danger" th:href="@{/centros/__${centro.id}__/eliminar}">Borrar</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<br />
+
+	<a class="col-2 btn btn-block btn-primary" th:href="@{/centros/nuevo}">Nuevo centro</a>
+</body>
+</html>

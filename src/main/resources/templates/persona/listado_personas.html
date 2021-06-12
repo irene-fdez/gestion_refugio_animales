@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Listado de usuarios</title>
+</head>
+
+<body>
+	<h1 class="center-text">Listado de usuarios</h1>
+
+	<form th:action="@{/personas}" method="post" class="form-horizontal" id="buscar-form">
+		<div class="row mb-5">
+			<div class="col-10 form-group">
+				<div class="control-group" id="nombre">
+					<label class="col-2 control-label">Nombre</label>
+					<input class="col-10 form-control" th:name="nombre" size="30" maxlength="80" placeholder="Nombre..." />
+				</div>
+				<div class="control-group mt-3" id="especialidad">
+					<label class="col-2 control-label">Especialidad</label>
+					<input class="col-10 form-control" th:name="especialidad" size="30" maxlength="80" placeholder="Especialidad..."/>
+				</div>
+			</div>
+
+
+			<div class="col-2 form-group">
+				<button type="submit" class="btn btn-sm btn-block btn-dark">Buscar</button>
+				<button type="submit" class="btn btn-sm btn-block btn-dark">Buscar todos</button>
+			</div>
+		</div>
+	</form>
+
+
+	<table id="dataTable" name="personas" class="table table-striped text-center">
+		<thead>
+			<tr>
+				<th>DNI</th>
+				<th>Nombre</th>
+				<th>Fecha Nacimiento</th>
+				<th>Especialidad</th>
+				<th>Centro de trabajo</th>
+				<th width="20%"/>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="persona : ${personas}">
+				<td><a th:href="@{/personas/__${persona.DNI}__/detalle}" th:text="${persona.DNI}"></a></td>
+				<td th:text="${persona.nombre}" />
+				<td th:text="${persona.fechaNacimiento}" />
+				<td th:text="${(persona.especialidad) == '' ? '-' : persona.especialidad}" />
+				<td th:text="${(persona.centroTrabajo) == null ? '-' : persona.centroTrabajo.nombre}" />
+				<td>
+					<a class="btn btn-sm btn-outline-info" th:href="@{/personas/__${persona.DNI}__}">Editar</a> 
+					<a class="btn btn-sm btn-outline-danger" th:href="@{/personas/__${persona.DNI}__/eliminar}" >Borrar</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<br />
+
+	<a class="col-2 btn btn-block btn-primary" th:href="@{/personas/nuevo}">Nuevo usuario</a>
+</body>
+</html>

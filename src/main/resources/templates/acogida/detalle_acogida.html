@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Acogida</title>
+</head>
+
+<body>
+	<h1 class="center-text" th:text="'Detalle acogida'"></h1>
+
+	<form th:object="${acogida}" class="form-horizontal" id="acogida-form" method="post">
+		<div class="form-group has-feedback">
+
+			<div class="form-group">
+				
+				<label class="col-2 control-label">Animal</label>
+				<label class="col-10 form-control" th:text="${acogida.animal.nombre}+' ('+${acogida.animal.tipo.nombre}+'-'+${acogida.animal.tipo.raza}+')'" readonly="readonly"/>
+				
+				<label class="col-2 control-label mt-3">Fecha nacimiento</label>
+				<input type="date" class="col-10 form-control" th:field="*{animal.fechaNacimiento}" readonly="readonly"/>
+				
+				<label class="col-2 control-label mt-3">Centro </label>
+				<label class="col-10 form-control" th:text="${acogida.centro.nombre}+' ('+${acogida.centro.ciudad.nombre}+')'" readonly="readonly"/>
+
+
+	            <label class="col-2 control-label mt-3">Fecha entrada</label>
+				<input type="date" class="col-10 form-control" th:field="*{fechaEntrada}" readonly="readonly"/>
+				
+				<label class="col-2 control-label mt-3">Tipo entrada</label>
+				<input class="col-10 form-control" th:field="*{tipoEntrada}"  readonly="readonly"/>
+				
+			</div>
+			<div class="form-group">
+				<a class="btn btn-block btn-dark col-2" th:href="@{/acogidas/}">Cancelar</a>
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>

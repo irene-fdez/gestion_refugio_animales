@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Tipo de animal</title>
+</head>
+
+<body>
+	<h1 class="center-text" th:text="'Tipo de animal'"></h1>
+
+	<form th:object="${tipo}" class="form-horizontal" id="tipo-form" method="post">
+		<div class="form-group has-feedback">
+
+			<div class="form-group">
+				<label class="col-2 control-label">Nombre</label>
+				<input class="col-10 form-control" th:field="*{nombre}" readonly="readonly" />
+				<label class="col-2 control-label mt-3">Raza</label>
+				<input class="col-10 form-control" th:field="*{raza}" readonly="readonly" />
+				<label class="col-2 control-label mt-3">Especie</label>
+				<input class="col-10 form-control" th:field="*{especie}" readonly="readonly" />
+			</div>
+			<div class="form-group">
+				<a class="btn btn-block btn-dark col-2" th:href="@{/tipos/}">Cancelar</a>
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>
